@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         Harvest
     }
     public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
-
+    public static Action<int> OnMoneyChanged;
     [HideInInspector] public int Money;
 
     [SerializeField] private SO_WorldSettings _worldSettings;
@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         var value = pot.GetHarvestValue();
         var accuracy = GetInputAccuracy();
         Money += Mathf.RoundToInt(value * accuracy);
+        OnMoneyChanged?.Invoke(Money);
         pot.Uproot();
     }
 
@@ -145,7 +146,7 @@ public class GameManager : MonoBehaviour
 
     private void SetAudioLine()
     {
-        _audioLine.Set(-1f, _worldSettings.StartWidth + 1f, BPM);
+        _audioLine.Set(-0.5f, _worldSettings.StartWidth - 0.5f, BPM);
         _audioLine.OnNewPos += OnAudioHit;
         _audioLine.Play();
     }

@@ -27,6 +27,7 @@ public class SO_Veg : ScriptableObject
     public Sprite Icon;
 
     [Header("Economy")]
+    public float SecondsToFullGrowth;
     public int UnlockCost;
     public LifeStage[] LifeStages;
 

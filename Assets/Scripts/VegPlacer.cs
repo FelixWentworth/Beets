@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class VegPlacer : MonoBehaviour
 {
+    public static bool IsPlacingVeg { get; private set; }
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _plantableLayer;
     [SerializeField] private float _fingerYOffset;
     [SerializeField] private float _offsetFromGround;
-    [SerializeField] private Color _highlightedColor;
     private Camera _mainCam;
-    private bool _isDraggingVeg;
     private GameObject _currentSpawnedVeg;
     private Pot previousPot;
     private SO_Veg _currentVeg;
@@ -29,7 +28,7 @@ public class VegPlacer : MonoBehaviour
 
     private void Update()
     {
-        if (_isDraggingVeg)
+        if (IsPlacingVeg)
         {
             _currentSpawnedVeg.transform.position = GetNewDragPos();
             HighlightingAssist();
@@ -40,7 +39,7 @@ public class VegPlacer : MonoBehaviour
     {
         _currentVeg = veg;
         _currentSpawnedVeg = Instantiate(veg.Prefab, GetNewDragPos(), Quaternion.identity);
-        _isDraggingVeg = true;
+        IsPlacingVeg = true;
     }
     
     Vector3 GetNewDragPos()
@@ -90,7 +89,7 @@ public class VegPlacer : MonoBehaviour
         previousPot.SetHighlight(false);
         Destroy(_currentSpawnedVeg);
         _currentSpawnedVeg = null;
-        _isDraggingVeg = false;
+        IsPlacingVeg = false;
         
         if (previousPot.Active)
         {
