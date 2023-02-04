@@ -595,6 +595,8 @@ MonoBehaviour:
   _worldSettings: {fileID: 11400000, guid: 399be2bdf1de5483a955b0220bb0fce3, type: 2}
   _worldParent: {fileID: 1221383478}
   _audioLine: {fileID: 1204074535}
+  _veg:
+  - {fileID: 11400000, guid: a3ce72c283abc473ea88f58471fb5d92, type: 2}
 --- !u!4 &1559189473
 Transform:
   m_ObjectHideFlags: 0
