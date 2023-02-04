@@ -13,8 +13,8 @@ public class Pot : MonoBehaviour
     [SerializeField] private GameObject _activeState;
     [SerializeField] private GameObject _inactiveState;
     [SerializeField] private MeshRenderer _activeMesh;
-    [SerializeField] private Color _highlightColor;
-    [SerializeField] private Color _originalColor;
+    [SerializeField] private Material _highlightMaterial;
+    [SerializeField] private Material _normalMaterial;
 
     [SerializeField] private AudioSource _source;
     [SerializeField] private float _startingVegScaleMultiplier;
@@ -151,6 +151,7 @@ public class Pot : MonoBehaviour
 
     public void SetHighlight(bool isHighlighted)
     {
-        _activeMesh.material.color = isHighlighted ? _highlightColor : _originalColor;
+        _activeMesh.material = isHighlighted ? _highlightMaterial : _normalMaterial;
+        
     }
 }

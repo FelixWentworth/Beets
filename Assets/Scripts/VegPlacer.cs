@@ -8,7 +8,6 @@ public class VegPlacer : MonoBehaviour
     [SerializeField] private LayerMask _plantableLayer;
     [SerializeField] private float _fingerYOffset;
     [SerializeField] private float _offsetFromGround;
-    [SerializeField] private Color _highlightedColor;
     private Camera _mainCam;
     private GameObject _currentSpawnedVeg;
     private Pot previousPot;
