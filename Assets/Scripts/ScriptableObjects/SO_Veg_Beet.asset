@@ -14,8 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Beet
   AudioType: Bass
-  Clip: {fileID: 0}
-  Prefab: {fileID: 5168357201477302832, guid: 150113569aef0413c851445278ffcfb4, type: 3}
-  Icon: {fileID: 21300000, guid: 25ef30b6809a94c7fbe8c06b13578118, type: 3}
+  Clip: {fileID: 8300000, guid: 4daa83e3250fa4c18a957b59b720ffe5, type: 3}
+  Prefab: {fileID: 6661817166294682866, guid: e430fd86aaa7f4596a4bb578aa5ca748, type: 3}
+  Icon: {fileID: 0}
   UnlockCost: 0
-  HarvestAmount: 0
+  LifeStages:
+  - LevelNum: 0
+    HarvestValue: 0
+    WateringScoreToUnlock: 0
+  - LevelNum: 1
+    HarvestValue: 10
+    WateringScoreToUnlock: 5
+  - LevelNum: 2
+    HarvestValue: 20
+    WateringScoreToUnlock: 10

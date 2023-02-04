@@ -7,51 +7,55 @@ public class AudioLine : MonoBehaviour
 {
     public Action<int> OnNewPos;
 
-    [SerializeField] private float Speed;
-    private float _speed;
+    private float _bpm;
     private int _lastPos;
 
     private float _startXPosition;
     private float _endXPosition;
 
+    private bool _isPlaying;
+
     private void Start()
     {
-        _speed = 0f;
+        _bpm = 0f;
         _lastPos = -1;
         StartCoroutine(Move());
     }
 
-    public void Set(float startX, float endX)
+    public void Set(float startX, float endX, float bpm)
     {
+        _bpm = bpm;
         _startXPosition = startX;
         _endXPosition = endX;
     }
 
     public void Play()
     {
-        _speed = Speed;
+        _isPlaying = true;
     }
 
     public void Pause()
     {
-        _speed = 0f;
+        _isPlaying = false;
     }
 
     private IEnumerator Move()
     {
         while (true)
         {
-            // TODO smooth this
-            transform.position += new Vector3(_speed * Time.deltaTime, 0f, 0f);
-            var pos = GetCurrentPos();
-            if (pos != _lastPos)
+            if (_isPlaying)
             {
-                _lastPos = pos;
-                OnNewPos?.Invoke(pos);
-            }
-            if (transform.position.x > _endXPosition)
-            {
-                ResetPosition();
+                transform.position += new Vector3(_bpm/60 * Time.deltaTime, 0f, 0f);
+                var pos = GetCurrentPos();
+                if (pos != _lastPos)
+                {
+                    _lastPos = pos;
+                    OnNewPos?.Invoke(pos);
+                }
+                if (transform.position.x > _endXPosition)
+                {
+                    ResetPosition();
+                }
             }
             yield return null;
         }

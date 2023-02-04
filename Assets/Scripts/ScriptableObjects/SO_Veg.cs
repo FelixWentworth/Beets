@@ -19,7 +19,16 @@ public class SO_Veg : ScriptableObject
 
     [Header("Economy")]
     public int UnlockCost;
-    public int HarvestAmount;
+    public LifeStage[] LifeStages;
+
+    [System.Serializable]
+    public class LifeStage
+    {
+        public int LevelNum;
+        public int HarvestValue;
+        public int WateringScoreToUnlock;
+    }
+
     public bool Unlocked
     {
         get { return PlayerPrefs.GetInt(Name + "_Unlocked", 0) == 1; }

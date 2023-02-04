@@ -1,11 +1,21 @@
 using System.Collections;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public SO_Veg[] Veg => _veg;
+    public enum GameAction
+    {
+        Plant,
+        Water,
+        Harvest
+    }
+    public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
+
+    [HideInInspector] public int Money;
+
     [SerializeField] private SO_WorldSettings _worldSettings;
     [SerializeField] private Transform _worldParent;
     [SerializeField] private AudioLine _audioLine;
@@ -13,11 +23,14 @@ public class GameManager : MonoBehaviour
     private Pot[,] _grid;
     private List<Vector2Int> _activePotPositions = new List<Vector2Int>();
 
-    [SerializeField] private SO_Veg[] _veg;
+    public SO_Veg[] Veg;
+
+    public int BPM;
 
     // Start is called before the first frame update
     void Start()
     {
+        InteractWithPot = HandleGameAction;
         CreateNewWorld();
     }
 
@@ -27,8 +40,25 @@ public class GameManager : MonoBehaviour
         GeneratePots();
         SetAudioLine();
 
-        CreateVeg(new Vector2Int(0, 4), "Beet");
+        GameManager.InteractWithPot(GameAction.Plant, new Vector2Int(0, 4), "Beet");
     }
+
+    private void HandleGameAction(GameAction action, Vector2Int target, string veg)
+    {
+        switch (action)
+        {
+            case GameAction.Plant:
+                CreateVeg(target, veg);
+                break;
+            case GameAction.Water:
+                WaterVeg(target);
+                break;
+            case GameAction.Harvest:
+                HarvestVeg(target);
+                break;
+        }
+    }
+
 
     private void CreateVeg(Vector2Int pos, string veg)
     {
@@ -37,14 +67,41 @@ public class GameManager : MonoBehaviour
             Debug.Log("Cannot plant on top of veg");
             return;
         }
-        var vegToPlant = _veg.FirstOrDefault(v => v.Name == veg);
+        var vegToPlant = Veg.FirstOrDefault(v => v.Name == veg);
         if (vegToPlant == null)
         {
-            Debug.Log("Unabel to find veg: " + veg);
+            Debug.Log("Unable to find veg: " + veg);
             return;
         }
 
         _grid[pos.x, pos.y].Set(vegToSpawn: vegToPlant);
+    }
+
+    private void HarvestVeg(Vector2Int pos)
+    {
+        var pot = _grid[pos.x, pos.y];
+        if (!pot.HasVeg)
+        {
+            Debug.Log("Cannot harvest an empty pot");
+            return;
+        }
+        var value = pot.GetHarvestValue();
+        var accuracy = GetInputAccuracy();
+        Money += Mathf.RoundToInt(value * accuracy);
+        pot.Uproot();
+    }
+
+    private void WaterVeg(Vector2Int pos)
+    {
+        var pot = _grid[pos.x, pos.y];
+        if (!pot.HasVeg)
+        {
+            Debug.Log("Cannot Water an empty pot");
+            return;
+        }
+
+        var accuracy = GetInputAccuracy();
+        pot.AddToWateringLevel(accuracy);
     }
 
     private void SetActivePotPositions()
@@ -85,7 +142,7 @@ public class GameManager : MonoBehaviour
 
     private void SetAudioLine()
     {
-        _audioLine.Set(-1f, _worldSettings.StartWidth + 1f);
+        _audioLine.Set(-1f, _worldSettings.StartWidth + 1f, BPM);
         _audioLine.OnNewPos += OnAudioHit;
         _audioLine.Play();
     }
@@ -106,6 +163,16 @@ public class GameManager : MonoBehaviour
     public float GetPitch(Vector2Int pos)
     {
         // TODO figure out level
+        var y = pos.y;
+        var step = (_worldSettings.MaxPitch - _worldSettings.MinPitch) / _worldSettings.PitchSteps;
+        var progressToMax = y / _worldSettings.MaxHeight;
+        var pitch = _worldSettings.MinPitch + (progressToMax * step);
+        pitch = Mathf.Clamp(pitch, _worldSettings.MinPitch, _worldSettings.MaxPitch);
+        return pitch;
+    }
+
+    public float GetInputAccuracy()
+    {
         return 1f;
     }
 }
