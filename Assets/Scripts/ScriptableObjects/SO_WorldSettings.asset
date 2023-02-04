@@ -15,8 +15,8 @@ MonoBehaviour:
   MinPitch: 0.1
   MaxPitch: 1
   PitchSteps: 10
-  StartWidth: 3
-  StartHeight: 3
+  StartWidth: 4
+  StartHeight: 4
   MaxWidth: 10
   MaxHeight: 10
   StartPos: {x: 0, y: 4}
