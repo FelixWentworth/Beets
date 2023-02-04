@@ -409,10 +409,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2863426057869392282, guid: 514ca3929402c414e98130bad04c83a3,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.38431373
+    - target: {fileID: 129441816, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -102.3248
+      objectReference: {fileID: 0}
+    - target: {fileID: 129441816, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.2351074
+      objectReference: {fileID: 0}
+    - target: {fileID: 239723701, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
+      propertyPath: m_Vertical
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 239723701, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
+      propertyPath: m_Horizontal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 239723701, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
+      propertyPath: m_VerticalScrollbar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 239723701, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
+      propertyPath: m_HorizontalScrollbar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008465054, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2863426057878323784, guid: 514ca3929402c414e98130bad04c83a3,
         type: 3}
@@ -524,11 +547,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 2863426058615026131, guid: 514ca3929402c414e98130bad04c83a3,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.45490196
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
 --- !u!1 &832575517
@@ -632,6 +650,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1008465053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008465053, guid: 514ca3929402c414e98130bad04c83a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 811253848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1008465056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008465053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 1
+  m_VerticalFit: 0
 --- !u!1001 &1124845629
 PrefabInstance:
   m_ObjectHideFlags: 0

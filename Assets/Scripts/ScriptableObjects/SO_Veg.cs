@@ -28,7 +28,7 @@ public class SO_Veg : ScriptableObject
 
     [Header("Economy")]
     public float SecondsToFullGrowth;
-    public int UnlockCost;
+    public int SeedPrice;
     public LifeStage[] LifeStages;
 
     [System.Serializable]
