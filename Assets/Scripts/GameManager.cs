@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public SO_Veg[] Veg;
 
+    public int BPM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour
 
     private void SetAudioLine()
     {
-        _audioLine.Set(-1f, _worldSettings.StartWidth + 1f);
+        _audioLine.Set(-1f, _worldSettings.StartWidth + 1f, BPM);
         _audioLine.OnNewPos += OnAudioHit;
         _audioLine.Play();
     }
@@ -152,6 +154,16 @@ public class GameManager : MonoBehaviour
     public float GetPitch(Vector2Int pos)
     {
         // TODO figure out level
+        var y = pos.y;
+        var step = (_worldSettings.MaxPitch - _worldSettings.MinPitch) / _worldSettings.PitchSteps;
+        var progressToMax = y / _worldSettings.MaxHeight;
+        var pitch = _worldSettings.MinPitch + (progressToMax * step);
+        pitch = Mathf.Clamp(pitch, _worldSettings.MinPitch, _worldSettings.MaxPitch);
+        return pitch;
+    }
+
+    public float GetInputAccuracy()
+    {
         return 1f;
     }
 }
