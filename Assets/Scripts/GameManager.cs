@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     private Pot[,] _grid;
     private List<Vector2Int> _activePotPositions = new List<Vector2Int>();
 
+    [SerializeField] private SO_Veg[] _veg;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,25 @@ public class GameManager : MonoBehaviour
         SetActivePotPositions();
         GeneratePots();
         SetAudioLine();
+
+        CreateVeg(new Vector2Int(0, 4), "Beet");
+    }
+
+    private void CreateVeg(Vector2Int pos, string veg)
+    {
+        if (_grid[pos.x, pos.y].HasVeg)
+        {
+            Debug.Log("Cannot plant on top of veg");
+            return;
+        }
+        var vegToPlant = _veg.FirstOrDefault(v => v.Name == veg);
+        if (vegToPlant == null)
+        {
+            Debug.Log("Unabel to find veg: " + veg);
+            return;
+        }
+
+        _grid[pos.x, pos.y].Set(vegToSpawn: vegToPlant);
     }
 
     private void SetActivePotPositions()
