@@ -12,7 +12,9 @@ public class Pot : MonoBehaviour
 
     [SerializeField] private AudioSource _source;
 
+    private GameObject _currentVeg;
     private SO_Veg _veg;
+    private float _wateringLevel = 0f;
 
     public void Set(bool active = true, SO_Veg vegToSpawn = null)
     {
@@ -23,8 +25,42 @@ public class Pot : MonoBehaviour
         if (vegToSpawn != null)
         {
             _veg = vegToSpawn;
-            Instantiate(vegToSpawn.Prefab, _vegSpawnPoint);
+            _currentVeg = Instantiate(vegToSpawn.Prefab, _vegSpawnPoint);
+            _wateringLevel = 0f;
         }
+    }
+
+    public int GetHarvestValue()
+    {
+        if (_veg == null)
+        {
+            return 0;
+        }
+        var value = 0;
+        foreach(var stage in _veg.LifeStages)
+        {
+            if (_wateringLevel >= stage.WateringScoreToUnlock)
+            {
+                value = stage.HarvestValue;
+            }
+        }
+        return value;
+    }
+
+    public void Uproot()
+    {
+        if (_currentVeg == null)
+        {
+            Debug.Log("Tried to uproot but no veg present");
+            return;
+        }
+        Destroy(_currentVeg.gameObject);
+        _veg = null;
+    }
+
+    public void AddToWateringLevel(float incrememnt)
+    {
+        _wateringLevel+= incrememnt;
     }
 
     public void TryPlay(float pitch)

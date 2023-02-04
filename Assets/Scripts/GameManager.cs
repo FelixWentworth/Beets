@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     }
     public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
 
+    [HideInInspector] public int Money;
+
     [SerializeField] private SO_WorldSettings _worldSettings;
     [SerializeField] private Transform _worldParent;
     [SerializeField] private AudioLine _audioLine;
@@ -77,22 +79,29 @@ public class GameManager : MonoBehaviour
 
     private void HarvestVeg(Vector2Int pos)
     {
-        if (!_grid[pos.x, pos.y].HasVeg)
+        var pot = _grid[pos.x, pos.y];
+        if (!pot.HasVeg)
         {
             Debug.Log("Cannot harvest an empty pot");
             return;
         }
-        // TODO harvest
+        var value = pot.GetHarvestValue();
+        var accuracy = GetInputAccuracy();
+        Money += Mathf.RoundToInt(value * accuracy);
+        pot.Uproot();
     }
 
     private void WaterVeg(Vector2Int pos)
     {
-        if (!_grid[pos.x, pos.y].HasVeg)
+        var pot = _grid[pos.x, pos.y];
+        if (!pot.HasVeg)
         {
             Debug.Log("Cannot Water an empty pot");
             return;
         }
-        // TODO water
+
+        var accuracy = GetInputAccuracy();
+        pot.AddToWateringLevel(accuracy);
     }
 
     private void SetActivePotPositions()
