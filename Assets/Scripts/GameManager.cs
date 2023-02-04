@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         Harvest
     }
     public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
-
+    public static Action<int> OnMoneyChanged;
     [HideInInspector] public int Money;
 
     [SerializeField] private SO_WorldSettings _worldSettings;
@@ -87,7 +87,10 @@ public class GameManager : MonoBehaviour
         }
         var value = pot.GetHarvestValue();
         var accuracy = GetInputAccuracy();
+        print($"harvest reward: {value}");
+        print($"harvest reward with accuracy: {value * accuracy}");
         Money += Mathf.RoundToInt(value * accuracy);
+        OnMoneyChanged?.Invoke(Money);
         pot.Uproot();
     }
 

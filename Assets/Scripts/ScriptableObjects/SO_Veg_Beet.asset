@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Beet
   AudioType: Bass
-  Clip: {fileID: 8300000, guid: 4daa83e3250fa4c18a957b59b720ffe5, type: 3}
+  Clip: {fileID: 8300000, guid: f107506b09dd345cb80b9ada629edc4d, type: 3}
   Prefab: {fileID: 5168357201477302832, guid: 150113569aef0413c851445278ffcfb4, type: 3}
   Icon: {fileID: 21300000, guid: 25ef30b6809a94c7fbe8c06b13578118, type: 3}
+  SecondsToFullGrowth: 5
   UnlockCost: 0
   LifeStages:
   - LevelNum: 0

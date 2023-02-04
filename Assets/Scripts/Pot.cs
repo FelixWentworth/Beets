@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Pot : MonoBehaviour
@@ -15,12 +17,52 @@ public class Pot : MonoBehaviour
     [SerializeField] private Color _originalColor;
 
     [SerializeField] private AudioSource _source;
+    [SerializeField] private float _startingVegScaleMultiplier;
 
     private GameObject _currentVeg;
     private SO_Veg _veg;
     private float _wateringLevel = 0f;
     private Vector2Int _gridPos;
     private bool _active;
+    private Vector3 _finalScale;
+
+    private float _growthSecondsElapsed = 0f;
+    
+    private void Update()
+    {
+        if (HasVeg)
+        {
+            _growthSecondsElapsed += Time.deltaTime;
+            float growthPercentage = Mathf.Clamp01(_growthSecondsElapsed / _veg.SecondsToFullGrowth);
+            int growthStage = 0;
+            if (growthPercentage > 0.5f && growthPercentage < 0.99f)
+            {
+                growthStage = 1;
+            } else if (growthPercentage >= 0.99f)
+            {
+                growthStage = 2;
+            }
+            LerpToGrowthStage(growthStage);
+            // _currentVeg.transform.localScale = _finalScale * growthPercentage;
+        }
+    }
+
+    void LerpToGrowthStage(int stage)
+    {
+        float scaleMultiplier = _startingVegScaleMultiplier;
+        if (stage == 1)
+        {
+            scaleMultiplier = 0.5f;
+        } else if (stage > 1)
+        {
+            scaleMultiplier = 1f;
+        }
+
+        var modelTransform = _currentVeg.transform.GetChild(0).transform;
+        var targetScale = _finalScale * scaleMultiplier; // startingScale
+        var newScale = Vector3.Lerp(modelTransform.localScale, targetScale, 0.1f);
+        modelTransform.localScale = newScale;
+    }
 
     public void Set(Vector2Int gridPos, bool active = true, SO_Veg vegToSpawn = null)
     {
@@ -34,6 +76,9 @@ public class Pot : MonoBehaviour
         {
             _veg = vegToSpawn;
             _currentVeg = Instantiate(vegToSpawn.Prefab, _vegSpawnPoint);
+            var modelTransform = _currentVeg.transform.GetChild(0); 
+            _finalScale = modelTransform.localScale;
+            modelTransform.localScale = Vector3.one * _startingVegScaleMultiplier;
             _wateringLevel = 0f;
         }
     }
@@ -45,14 +90,29 @@ public class Pot : MonoBehaviour
             return 0;
         }
         var value = 0;
-        foreach(var stage in _veg.LifeStages)
+        
+        
+        // TODO - decide whether to do growth over time or active watering. Trying growth over time here:
+        float timePerStage = _veg.SecondsToFullGrowth / 3;
+        int growthStagesPassed = (int)(_growthSecondsElapsed / timePerStage);
+        print($"time per stage: {timePerStage}. elapsed: {_growthSecondsElapsed}. stages complete: {growthStagesPassed}");
+        if (growthStagesPassed < _veg.LifeStages.Length)
         {
-            if (_wateringLevel >= stage.WateringScoreToUnlock)
-            {
-                value = stage.HarvestValue;
-            }
+            int harvestReward = _veg.LifeStages[growthStagesPassed].HarvestValue;
+            return harvestReward;
         }
-        return value;
+        print("defaulting to last harvest value");
+        return _veg.LifeStages.Last().HarvestValue;
+        
+
+        // foreach(var stage in _veg.LifeStages)
+        // {
+        //     if (_wateringLevel >= stage.WateringScoreToUnlock)
+        //     {
+        //         value = stage.HarvestValue;
+        //     }
+        // }
+        // return value;
     }
 
     public void Uproot()
