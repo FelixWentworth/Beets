@@ -16,9 +16,9 @@ MonoBehaviour:
   MaxPitch: 6
   PitchSteps: 6
   StartWidth: 4
-  StartHeight: 4
+  StartHeight: 7
   MaxWidth: 10
-  MaxHeight: 10
-  StartPos: {x: 0, y: 4}
+  MaxHeight: 7
+  StartPos: {x: 0, y: 0}
   PotPrefab: {fileID: 6661817166294682866, guid: a48d370e62b0e4818914aaab58f7e916,
     type: 3}

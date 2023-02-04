@@ -82,6 +82,7 @@ public class Pot : MonoBehaviour
         GetComponent<Animation>().Play();
 
         _source.clip = _veg.Clip(pitch);
+        Debug.Log("playing clip: " + _source.clip);
         _source.Play();
     }
 
