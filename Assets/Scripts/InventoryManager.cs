@@ -1,28 +1,44 @@
 using System;
 using UnityEngine;
 
-public class UiManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
-    private GameManager _gameManager;
     [SerializeField] private Transform _inventoryParent;
     [SerializeField] private InventoryBtn _inventoryBtnPrefab;
-    
+    [SerializeField] private CanvasGroup _inventoryCg;
     private Inventory _inventory;
+    private GameManager _gameManager;
 
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
+        InventoryBtn.OnSelected += OnSelected;
+        InventoryBtn.OnDragEnd += OnDragEnd;
+    }
+    
+    private void OnDestroy()
+    {
+        InventoryBtn.OnSelected -= OnSelected;
+        InventoryBtn.OnDragEnd -= OnDragEnd;
+    }
+
+    private void OnDragEnd()
+    {
+        SetInventoryActive(true);
+    }
+
+    private void OnSelected(SO_Veg obj)
+    {
+        SetInventoryActive(false);
     }
 
     private void Start()
     {
-        
         FirstLoad();
     }
     
     void FirstLoad()
     {
-        InventoryBtn.OnSelected += OnVegSelected;
         foreach (var vegConfig in _gameManager.Veg)
         {
             var newBtn = Instantiate(_inventoryBtnPrefab, _inventoryParent);
@@ -30,10 +46,12 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    void OnVegSelected(SO_Veg veg)
+    void SetInventoryActive(bool isActive)
     {
-        
+        _inventoryCg.interactable = isActive;
+        _inventoryCg.alpha = isActive ? 1f : 0.2f;
     }
+
 }
 
 [Serializable]

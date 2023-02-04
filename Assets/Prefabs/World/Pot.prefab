@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6074324281145817386}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 5781257606613810373}
   - component: {fileID: 8516048859071751230}
   - component: {fileID: 6895241351512907917}
-  m_Layer: 0
+  - component: {fileID: 831634825076987827}
+  m_Layer: 7
   m_Name: Pot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,6 +84,9 @@ MonoBehaviour:
   _vegSpawnPoint: {fileID: 6074324281145817386}
   _activeState: {fileID: 7220525408361948394}
   _inactiveState: {fileID: 7710535122831092953}
+  _activeMesh: {fileID: 7220525408361948389}
+  _highlightColor: {r: 0.03909729, g: 0.9811321, b: 0, a: 1}
+  _originalColor: {r: 0.5568628, g: 0.16862746, b: 0.019607844, a: 1}
   _source: {fileID: 8516048859071751230}
 --- !u!82 &8516048859071751230
 AudioSource:
@@ -196,6 +200,19 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &831634825076987827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6661817166294682866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7220525408361948394
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,8 +224,7 @@ GameObject:
   - component: {fileID: 7220525408361948395}
   - component: {fileID: 7220525408361948390}
   - component: {fileID: 7220525408361948389}
-  - component: {fileID: 7220525408361948388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Active
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,19 +296,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7220525408361948388
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7220525408361948394}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7710535122831092953
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,8 +307,7 @@ GameObject:
   - component: {fileID: 8044656842188003513}
   - component: {fileID: 7781785667853647511}
   - component: {fileID: 2281999452454307061}
-  - component: {fileID: 5614944582548440501}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Inactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,16 +379,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5614944582548440501
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7710535122831092953}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

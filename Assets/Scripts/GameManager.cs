@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     private void OnAudioHit(int x)
     {
-        Debug.Log("On Audio Hit: " + x);
+        // Debug.Log("On Audio Hit: " + x);
         foreach (var pot in _activePotPositions)
         {            
             if (pot.x == x)

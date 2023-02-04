@@ -9,6 +9,9 @@ public class Pot : MonoBehaviour
     [SerializeField] private Transform _vegSpawnPoint;
     [SerializeField] private GameObject _activeState;
     [SerializeField] private GameObject _inactiveState;
+    [SerializeField] private MeshRenderer _activeMesh;
+    [SerializeField] private Color _highlightColor;
+    [SerializeField] private Color _originalColor;
 
     [SerializeField] private AudioSource _source;
 
@@ -40,5 +43,10 @@ public class Pot : MonoBehaviour
         _source.clip = _veg.Clip;
         _source.pitch = pitch;
         _source.Play();
+    }
+
+    public void SetHighlight(bool isHighlighted)
+    {
+        _activeMesh.material.color = isHighlighted ? _highlightColor : _originalColor;
     }
 }
