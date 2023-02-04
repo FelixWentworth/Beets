@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private Pot[,] _grid;
     private List<Vector2Int> _activePotPositions = new List<Vector2Int>();
 
-    [SerializeField] private SO_Veg[] _veg;
+    public SO_Veg[] Veg;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Cannot plant on top of veg");
             return;
         }
-        var vegToPlant = _veg.FirstOrDefault(v => v.Name == veg);
+        var vegToPlant = Veg.FirstOrDefault(v => v.Name == veg);
         if (vegToPlant == null)
         {
             Debug.Log("Unable to find veg: " + veg);
