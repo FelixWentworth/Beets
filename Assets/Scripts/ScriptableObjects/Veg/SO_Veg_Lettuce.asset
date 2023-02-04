@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76870f1b033e4b829c116c60b69313e, type: 3}
+  m_Name: SO_Veg_Lettuce
+  m_EditorClassIdentifier: 
+  Name: Lettuce
+  AudioType: Bells
+  Clips:
+  - Level: 0
+    AudioClip: {fileID: 8300000, guid: cf792c4c306e64a83b22c9b744804883, type: 3}
+  - Level: 1
+    AudioClip: {fileID: 8300000, guid: 99972fefb7c714bdd9a0bd34034cdccf, type: 3}
+  - Level: 2
+    AudioClip: {fileID: 8300000, guid: 299703923ec2d41b289f244f10f8f301, type: 3}
+  - Level: 3
+    AudioClip: {fileID: 8300000, guid: 71233f3eea93b407882430a834f5d94f, type: 3}
+  - Level: 4
+    AudioClip: {fileID: 8300000, guid: dcdac6cf72f2e46689fa79fc7c5d88a3, type: 3}
+  - Level: 5
+    AudioClip: {fileID: 8300000, guid: 10bd3b7cecae748d2bf63f45dba4732c, type: 3}
+  - Level: 6
+    AudioClip: {fileID: 8300000, guid: d20d53aa1d8f54d5eaced3afad25309b, type: 3}
+  Prefab: {fileID: 5168357201477302832, guid: a7647e312054b440aa169baaa51cd154, type: 3}
+  Icon: {fileID: 21300000, guid: 9932bae7541af456dababc5df8dece97, type: 3}
+  UnlockCost: 0
+  LifeStages:
+  - LevelNum: 0
+    HarvestValue: 0
+    WateringScoreToUnlock: 0
+  - LevelNum: 1
+    HarvestValue: 10
+    WateringScoreToUnlock: 5
+  - LevelNum: 2
+    HarvestValue: 20
+    WateringScoreToUnlock: 10

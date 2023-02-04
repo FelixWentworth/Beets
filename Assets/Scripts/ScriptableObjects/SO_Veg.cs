@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,15 @@ public class SO_Veg : ScriptableObject
     [Header("Audio")]
     [Tooltip("Eg. bass, piano, harp")]
     public string AudioType; 
-    public AudioClip Clip;
+    public VegSound[] Clips;
+    public AudioClip Clip(int pitchLevel) => Clips.FirstOrDefault(c => c.Level == pitchLevel).AudioClip;
+
+    [System.Serializable]
+    public class VegSound
+    {
+        public int Level;
+        public AudioClip AudioClip;
+    }
 
     [Header("Visuals")]
     public GameObject Prefab;

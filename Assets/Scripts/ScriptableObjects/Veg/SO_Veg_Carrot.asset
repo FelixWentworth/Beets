@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76870f1b033e4b829c116c60b69313e, type: 3}
+  m_Name: SO_Veg_Carrot
+  m_EditorClassIdentifier: 
+  Name: Carrot
+  AudioType: Guitar
+  Clips:
+  - Level: 0
+    AudioClip: {fileID: 8300000, guid: ae938357cfc834552853650f5a3c223d, type: 3}
+  - Level: 1
+    AudioClip: {fileID: 8300000, guid: f66feb57200dd46be91f1c60d9150cc5, type: 3}
+  - Level: 2
+    AudioClip: {fileID: 8300000, guid: 519903c22ea6c43d7b6305905850487f, type: 3}
+  - Level: 3
+    AudioClip: {fileID: 8300000, guid: 6c2a183af46b344fe93f7162ca7abba1, type: 3}
+  - Level: 4
+    AudioClip: {fileID: 8300000, guid: 26d37a000a27b466b99397b9ffcf0491, type: 3}
+  - Level: 5
+    AudioClip: {fileID: 8300000, guid: a0b95250ab1474bdab35962811973a8a, type: 3}
+  - Level: 6
+    AudioClip: {fileID: 8300000, guid: 692bee8224b834bf4969e9c6bfddd635, type: 3}
+  Prefab: {fileID: 5168357201477302832, guid: a7647e312054b440aa169baaa51cd154, type: 3}
+  Icon: {fileID: 21300000, guid: 9932bae7541af456dababc5df8dece97, type: 3}
+  UnlockCost: 0
+  LifeStages:
+  - LevelNum: 0
+    HarvestValue: 0
+    WateringScoreToUnlock: 0
+  - LevelNum: 1
+    HarvestValue: 10
+    WateringScoreToUnlock: 5
+  - LevelNum: 2
+    HarvestValue: 20
+    WateringScoreToUnlock: 10

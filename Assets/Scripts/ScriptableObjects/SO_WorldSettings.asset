@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb74b5a63cfb411496937e7687bbeb4, type: 3}
   m_Name: SO_WorldSettings
   m_EditorClassIdentifier: 
-  MinPitch: 0.1
-  MaxPitch: 1
-  PitchSteps: 10
+  MinPitch: 0
+  MaxPitch: 6
+  PitchSteps: 6
   StartWidth: 4
   StartHeight: 4
   MaxWidth: 10
