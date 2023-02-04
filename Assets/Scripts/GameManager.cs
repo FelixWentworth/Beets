@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         GeneratePots();
         SetAudioLine();
 
-        InteractWithPot(GameAction.Plant, new Vector2Int(0, 4), "Beet");
+        GameManager.InteractWithPot(GameAction.Plant, new Vector2Int(0, 4), "Beet");
     }
 
     private void HandleGameAction(GameAction action, Vector2Int target, string veg)
