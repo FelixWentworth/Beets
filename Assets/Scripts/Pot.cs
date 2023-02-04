@@ -19,10 +19,10 @@ public class Pot : MonoBehaviour
         _activeState.SetActive(active);
         _inactiveState.SetActive(!active);
 
-        _veg = vegToSpawn;
 
-        if (_veg != null)
+        if (vegToSpawn != null)
         {
+            _veg = vegToSpawn;
             Instantiate(vegToSpawn.Prefab, _vegSpawnPoint);
         }
     }

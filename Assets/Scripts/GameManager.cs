@@ -1,10 +1,19 @@
 using System.Collections;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameAction
+    {
+        Plant,
+        Water,
+        Harvest
+    }
+    public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
+
     [SerializeField] private SO_WorldSettings _worldSettings;
     [SerializeField] private Transform _worldParent;
     [SerializeField] private AudioLine _audioLine;
@@ -17,6 +26,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InteractWithPot = HandleGameAction;
         CreateNewWorld();
     }
 
@@ -26,8 +36,25 @@ public class GameManager : MonoBehaviour
         GeneratePots();
         SetAudioLine();
 
-        CreateVeg(new Vector2Int(0, 4), "Beet");
+        InteractWithPot(GameAction.Plant, new Vector2Int(0, 4), "Beet");
     }
+
+    private void HandleGameAction(GameAction action, Vector2Int target, string veg)
+    {
+        switch (action)
+        {
+            case GameAction.Plant:
+                CreateVeg(target, veg);
+                break;
+            case GameAction.Water:
+                WaterVeg(target);
+                break;
+            case GameAction.Harvest:
+                HarvestVeg(target);
+                break;
+        }
+    }
+
 
     private void CreateVeg(Vector2Int pos, string veg)
     {
@@ -39,11 +66,31 @@ public class GameManager : MonoBehaviour
         var vegToPlant = _veg.FirstOrDefault(v => v.Name == veg);
         if (vegToPlant == null)
         {
-            Debug.Log("Unabel to find veg: " + veg);
+            Debug.Log("Unable to find veg: " + veg);
             return;
         }
 
         _grid[pos.x, pos.y].Set(vegToSpawn: vegToPlant);
+    }
+
+    private void HarvestVeg(Vector2Int pos)
+    {
+        if (!_grid[pos.x, pos.y].HasVeg)
+        {
+            Debug.Log("Cannot harvest an empty pot");
+            return;
+        }
+        // TODO harvest
+    }
+
+    private void WaterVeg(Vector2Int pos)
+    {
+        if (!_grid[pos.x, pos.y].HasVeg)
+        {
+            Debug.Log("Cannot Water an empty pot");
+            return;
+        }
+        // TODO water
     }
 
     private void SetActivePotPositions()
