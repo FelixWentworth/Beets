@@ -134,18 +134,18 @@ public class Pot : MonoBehaviour
         _wateringLevel+= incrememnt;
     }
 
-    public void TryPlay(float pitch)
+    public void TryPlay(int pitch)
     {
-        // TODO remove - just doing this to visualize when it's trying to play audio
-        GetComponent<Animation>().Play();
-
-        if (_veg == null)
+        if (!HasVeg)
         {
             return;
         }
 
-        _source.clip = _veg.Clip;
-        _source.pitch = pitch;
+        // TODO remove - just doing this to visualize when it's trying to play audio
+        GetComponent<Animation>().Play();
+
+        _source.clip = _veg.Clip(pitch);
+        Debug.Log("playing clip: " + _source.clip);
         _source.Play();
     }
 

@@ -13,8 +13,22 @@ MonoBehaviour:
   m_Name: SO_Veg_Beet
   m_EditorClassIdentifier: 
   Name: Beet
-  AudioType: Bass
-  Clip: {fileID: 8300000, guid: f107506b09dd345cb80b9ada629edc4d, type: 3}
+  AudioType: Tuba
+  Clips:
+  - Level: 0
+    AudioClip: {fileID: 8300000, guid: c8fcf5dcfb8e240ab8aa771922bf9dda, type: 3}
+  - Level: 1
+    AudioClip: {fileID: 8300000, guid: bbac62101287e47c7b43e6b6fe980b8d, type: 3}
+  - Level: 2
+    AudioClip: {fileID: 8300000, guid: 9ab7654d6869c47a89a1923a72daf604, type: 3}
+  - Level: 3
+    AudioClip: {fileID: 8300000, guid: b5c4c30a412c743198ba613ab9efd221, type: 3}
+  - Level: 4
+    AudioClip: {fileID: 8300000, guid: fca97829d21224fc5bbd00e1afc023a6, type: 3}
+  - Level: 5
+    AudioClip: {fileID: 8300000, guid: 73c7ad787a56b4728a1865f7c343c421, type: 3}
+  - Level: 6
+    AudioClip: {fileID: 8300000, guid: f07e148ecf0d94b289520d5a8f7e924a, type: 3}
   Prefab: {fileID: 5168357201477302832, guid: 150113569aef0413c851445278ffcfb4, type: 3}
   Icon: {fileID: 21300000, guid: 25ef30b6809a94c7fbe8c06b13578118, type: 3}
   SecondsToFullGrowth: 5

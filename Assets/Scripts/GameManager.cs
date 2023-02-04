@@ -161,15 +161,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public float GetPitch(Vector2Int pos)
+    public int GetPitch(Vector2Int pos)
     {
-        // TODO figure out level
-        var y = pos.y;
-        var step = (_worldSettings.MaxPitch - _worldSettings.MinPitch) / _worldSettings.PitchSteps;
-        var progressToMax = y / _worldSettings.MaxHeight;
-        var pitch = _worldSettings.MinPitch + (progressToMax * step);
-        pitch = Mathf.Clamp(pitch, _worldSettings.MinPitch, _worldSettings.MaxPitch);
-        return pitch;
+        return pos.y;
     }
 
     public float GetInputAccuracy()
