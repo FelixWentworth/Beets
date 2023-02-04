@@ -16,5 +16,6 @@ MonoBehaviour:
   AudioType: Bass
   Clip: {fileID: 0}
   Prefab: {fileID: 6661817166294682866, guid: e430fd86aaa7f4596a4bb578aa5ca748, type: 3}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 25ef30b6809a94c7fbe8c06b13578118, type: 3}
   UnlockCost: 0
+  HarvestAmount: 0

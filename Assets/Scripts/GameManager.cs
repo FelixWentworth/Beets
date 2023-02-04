@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public SO_Veg[] Veg => _veg;
     [SerializeField] private SO_WorldSettings _worldSettings;
     [SerializeField] private Transform _worldParent;
     [SerializeField] private AudioLine _audioLine;
