@@ -87,8 +87,6 @@ public class GameManager : MonoBehaviour
         }
         var value = pot.GetHarvestValue();
         var accuracy = GetInputAccuracy();
-        print($"harvest reward: {value}");
-        print($"harvest reward with accuracy: {value * accuracy}");
         Money += Mathf.RoundToInt(value * accuracy);
         OnMoneyChanged?.Invoke(Money);
         pot.Uproot();

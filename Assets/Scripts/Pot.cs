@@ -76,6 +76,7 @@ public class Pot : MonoBehaviour
         {
             _veg = vegToSpawn;
             _currentVeg = Instantiate(vegToSpawn.Prefab, _vegSpawnPoint);
+            _growthSecondsElapsed = 0f;
             var modelTransform = _currentVeg.transform.GetChild(0); 
             _finalScale = modelTransform.localScale;
             modelTransform.localScale = Vector3.one * _startingVegScaleMultiplier;
@@ -94,15 +95,17 @@ public class Pot : MonoBehaviour
         
         // TODO - decide whether to do growth over time or active watering. Trying growth over time here:
         float timePerStage = _veg.SecondsToFullGrowth / 3;
-        int growthStagesPassed = (int)(_growthSecondsElapsed / timePerStage);
-        print($"time per stage: {timePerStage}. elapsed: {_growthSecondsElapsed}. stages complete: {growthStagesPassed}");
+        int growthStagesPassed =  (int)(_growthSecondsElapsed / timePerStage);
+        int reward = 0;
         if (growthStagesPassed < _veg.LifeStages.Length)
         {
-            int harvestReward = _veg.LifeStages[growthStagesPassed].HarvestValue;
-            return harvestReward;
+            reward = _veg.LifeStages[growthStagesPassed].HarvestValue;
         }
-        print("defaulting to last harvest value");
-        return _veg.LifeStages.Last().HarvestValue;
+        else
+        {
+            reward =_veg.LifeStages.Last().HarvestValue;
+        }
+        return reward; 
         
 
         // foreach(var stage in _veg.LifeStages)
