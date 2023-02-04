@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        _grid[pos.x, pos.y].Set(vegToSpawn: vegToPlant);
+        _grid[pos.x, pos.y].Set(new Vector2Int(pos.x, pos.y), vegToSpawn: vegToPlant);
     }
 
     private void HarvestVeg(Vector2Int pos)
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
                 var pot = Instantiate(prefab, _worldParent).GetComponent<Pot>();
                 var pos = new Vector2Int(x, y);
                 pot.transform.localPosition = new Vector3(pos.x, 0, pos.y);
-                pot.Set(active: _activePotPositions.Contains(pos));
+                pot.Set(new Vector2Int(x,y), active: _activePotPositions.Contains(pos));
                 _grid[x,y] = pot; 
             }
         }

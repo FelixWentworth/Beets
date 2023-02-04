@@ -24,6 +24,7 @@ public class InventoryManager : MonoBehaviour
 
     private void OnDragEnd()
     {
+        
         SetInventoryActive(true);
     }
 

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Pot : MonoBehaviour
 {
     public bool HasVeg => _veg != null;
-
+    public Vector2Int GridPos => _gridPos;
+    public bool Active => _active;
     [SerializeField] private Transform _vegSpawnPoint;
     [SerializeField] private GameObject _activeState;
     [SerializeField] private GameObject _inactiveState;
@@ -18,9 +19,13 @@ public class Pot : MonoBehaviour
     private GameObject _currentVeg;
     private SO_Veg _veg;
     private float _wateringLevel = 0f;
+    private Vector2Int _gridPos;
+    private bool _active;
 
-    public void Set(bool active = true, SO_Veg vegToSpawn = null)
+    public void Set(Vector2Int gridPos, bool active = true, SO_Veg vegToSpawn = null)
     {
+        _active = active;
+        _gridPos = gridPos;
         _activeState.SetActive(active);
         _inactiveState.SetActive(!active);
 

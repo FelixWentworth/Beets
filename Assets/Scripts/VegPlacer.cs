@@ -12,6 +12,7 @@ public class VegPlacer : MonoBehaviour
     private bool _isDraggingVeg;
     private GameObject _currentSpawnedVeg;
     private Pot previousPot;
+    private SO_Veg _currentVeg;
     
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class VegPlacer : MonoBehaviour
     
     void OnVegSelected(SO_Veg veg)
     {
+        _currentVeg = veg;
         _currentSpawnedVeg = Instantiate(veg.Prefab, GetNewDragPos(), Quaternion.identity);
         _isDraggingVeg = true;
     }
@@ -84,7 +86,16 @@ public class VegPlacer : MonoBehaviour
     
     private void OnDragEnd()
     {
+        
+        previousPot.SetHighlight(false);
+        Destroy(_currentSpawnedVeg);
+        _currentSpawnedVeg = null;
         _isDraggingVeg = false;
+        
+        if (previousPot.Active)
+        {
+            GameManager.InteractWithPot(GameManager.GameAction.Plant, previousPot.GridPos, _currentVeg.Name);
+        }
     }
 
 
