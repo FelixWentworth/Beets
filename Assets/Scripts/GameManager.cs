@@ -40,7 +40,10 @@ public class GameManager : MonoBehaviour
         GeneratePots();
         SetAudioLine();
 
-        GameManager.InteractWithPot(GameAction.Plant, new Vector2Int(0, 4), "Beet");
+        InteractWithPot(GameAction.Plant, new Vector2Int(0, 0), "Potato");
+        InteractWithPot(GameAction.Plant, new Vector2Int(1, 1), "Potato");
+        InteractWithPot(GameAction.Plant, new Vector2Int(2, 0), "Potato");
+        InteractWithPot(GameAction.Plant, new Vector2Int(3, 1), "Potato");
     }
 
     private void HandleGameAction(GameAction action, Vector2Int target, string veg)
