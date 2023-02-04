@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     private void SetAudioLine()
     {
-        _audioLine.Set(-1f, _worldSettings.StartWidth + 1f, BPM);
+        _audioLine.Set(-0.5f, _worldSettings.StartWidth - 0.5f, BPM);
         _audioLine.OnNewPos += OnAudioHit;
         _audioLine.Play();
     }

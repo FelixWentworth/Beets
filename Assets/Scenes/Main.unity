@@ -409,6 +409,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2863426057869392282, guid: 514ca3929402c414e98130bad04c83a3,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.38431373
+      objectReference: {fileID: 0}
     - target: {fileID: 2863426057878323784, guid: 514ca3929402c414e98130bad04c83a3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -518,6 +523,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863426058615026131, guid: 514ca3929402c414e98130bad04c83a3,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.45490196
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 514ca3929402c414e98130bad04c83a3, type: 3}
@@ -784,6 +794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538208a4f78e9440e9d39cf81860f4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bpm: 0
+  _startXPosition: 0
+  _endXPosition: 0
 --- !u!1 &1221383477
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +903,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7210f2d7ccd440a9b3ec8bf8e4f1bcf, type: 2}
   - {fileID: 11400000, guid: 63c766145320947d69f25859c0b76465, type: 2}
   - {fileID: 11400000, guid: e7cf7205cc7904ce19db61c2ea5457b2, type: 2}
-  BPM: 120
+  BPM: 90
 --- !u!4 &1559189473
 Transform:
   m_ObjectHideFlags: 0

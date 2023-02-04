@@ -7,11 +7,11 @@ public class AudioLine : MonoBehaviour
 {
     public Action<int> OnNewPos;
 
-    private float _bpm;
+    [SerializeField]private float _bpm;
     private int _lastPos;
 
-    private float _startXPosition;
-    private float _endXPosition;
+    [SerializeField]private float _startXPosition;
+    [SerializeField]private float _endXPosition;
 
     private bool _isPlaying;
 
@@ -37,10 +37,12 @@ public class AudioLine : MonoBehaviour
     public void Pause()
     {
         _isPlaying = false;
+        Application.targetFrameRate = 60;
     }
 
     private IEnumerator Move()
     {
+        
         while (true)
         {
             if (_isPlaying)
