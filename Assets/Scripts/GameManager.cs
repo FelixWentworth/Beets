@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     }
     public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
     public static Action<int> OnMoneyChanged;
+    public static Action<int> OnColumnAudioHit;
     public static Action<SO_Veg> OnVegBought;
 
     [HideInInspector] public int Money;
@@ -176,6 +177,7 @@ public class GameManager : MonoBehaviour
                 _grid[pot.x, pot.y].TryPlay(pitch);
             }
         }
+        OnColumnAudioHit?.Invoke(x);
     }
 
     public int GetPitch(Vector2Int pos)

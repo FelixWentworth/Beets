@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8874064008575316458
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1028065332073157551, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: OverrideStartState
+      value: 
+      objectReference: {fileID: 11400000, guid: c44e7e8d6840aa243b6c33ec85052763,
+        type: 2}
+    - target: {fileID: 1028065332073157551, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: SmoothVertical.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028065332073157551, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: TurnMultiplier.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028065332073157551, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: useCameraInput.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358332334682153091, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_Name
+      value: Raven PA Mobile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600141036683344431, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_Name
+      value: Raven PA Mobile
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073542731272046851, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: useCameraUp.ConstantValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073542731272046851, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: SmoothVertical.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073542731272046851, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: TurnMultiplier.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073542731272046851, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: useCameraInput.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103559690447829058, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860711244119444553, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: Events.Array.data[0].Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055388704227662981, guid: 6569455b566adf84494b74f45c0c01a6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1026415798694191854, guid: 6569455b566adf84494b74f45c0c01a6, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 6569455b566adf84494b74f45c0c01a6, type: 3}

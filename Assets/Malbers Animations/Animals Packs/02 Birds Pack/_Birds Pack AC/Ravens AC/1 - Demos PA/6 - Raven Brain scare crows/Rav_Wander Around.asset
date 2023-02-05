@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2711622004801707346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4583d9499befcd642b07b4f6a99bbcd3, type: 3}
+  m_Name: Hunger is over 70
+  m_EditorClassIdentifier: 
+  Description: Find if Hunger is greater than 70%
+  DecisionID:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  send: 0
+  interval:
+    UseConstant: 1
+    ConstantValue: 0.2
+    Variable: {fileID: 0}
+  checkOn: 0
+  Stat: {fileID: 11400000, guid: af163a301fc6eb642afd2bd110058459, type: 2}
+  Option: 0
+  StatIs: 1
+  Value: 0
+  m_Value:
+    UseConstant: 1
+    ConstantValue: 70
+    Variable: {fileID: 0}
+  TryGetValue: 1
+  hideVars: 0
+--- !u!114 &-1624297823676852853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4681abb1579a87d4ca46923c098ddece, type: 3}
+  m_Name: Play is NOT Near and is Hungry
+  m_EditorClassIdentifier: 
+  Description: All Decisions on the list  must be TRUE in order to sent a True Decision
+  DecisionID:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  send: 0
+  interval:
+    UseConstant: 1
+    ConstantValue: 0.2
+    Variable: {fileID: 0}
+  list_index: 0
+  decisions:
+  - {fileID: 8356444209187121765, guid: 7596d47bd1802f54e8d5145b7d3c404b, type: 2}
+  - {fileID: -2711622004801707346}
+  invert: 0100
+  debug: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e33e187dc72d4a48aaede99913c6393, type: 3}
+  m_Name: Rav_Wander Around
+  m_EditorClassIdentifier: 
+  ID:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  tasks:
+  - {fileID: 1797854422363860606}
+  transitions:
+  - decision: {fileID: -1624297823676852853}
+    trueState: {fileID: 11400000, guid: 7596d47bd1802f54e8d5145b7d3c404b, type: 2}
+    falseState: {fileID: 0}
+  GizmoStateColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  CreateTaskAsset: 1
+  CreateDecisionAsset: 1
+--- !u!114 &1797854422363860606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f52ecadff7d8914eae97320934863d1, type: 3}
+  m_Name: Wander and Patrol
+  m_EditorClassIdentifier: 
+  Description: Simple Patrol Logic using the Default AiAnimal Control Movement System
+  MessageID:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  UpdateInterval: 0.2
+  WaitForPreviousTask: 0
+  LookAtOnArrival: 0
+  patrolType: 1
+  RuntimeSet: {fileID: 11400000, guid: 9e9acc2dc388d924da545551a6782493, type: 2}
+  rtype: 1
+  RTIndex:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  RTName:
+    UseConstant: 1
+    ConstantValue: 
+    Variable: {fileID: 0}
