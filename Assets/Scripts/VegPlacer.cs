@@ -4,6 +4,7 @@ using UnityEngine;
 public class VegPlacer : MonoBehaviour
 {
     public static bool IsPlacingVeg { get; private set; }
+    public static Action<string> OnVegPlaced;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _plantableLayer;
     [SerializeField] private float _fingerYOffset;
@@ -93,6 +94,7 @@ public class VegPlacer : MonoBehaviour
         
         if (previousPot.Active)
         {
+            OnVegPlaced?.Invoke(_currentVeg.Name);
             GameManager.InteractWithPot(GameManager.GameAction.Plant, previousPot.GridPos, _currentVeg.Name);
         }
     }
