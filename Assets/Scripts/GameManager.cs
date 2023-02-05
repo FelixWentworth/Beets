@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
             var pot = _grid[coord.x, coord.y];
             if (!rowSignSet)
             {
-                pot.SetUnlockState(_expandRowMaterial, TryUnlockRow, true, $"${_nextRowCost}");
+                pot.SetUnlockState(_expandRowMaterial, TryUnlockRow, true, $"{_nextRowCost}");
                 rowSignSet = true;
             }
             else
@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
             var pot = _grid[coord.x, coord.y];
             if (!colSignSet)
             {
-                pot.SetUnlockState(_expandColumnMaterial, TryUnlockColumn, true, $"${_nextColumnCost}");
+                pot.SetUnlockState(_expandColumnMaterial, TryUnlockColumn, true, $"{_nextColumnCost}");
                 colSignSet = true;
             }
             else

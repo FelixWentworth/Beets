@@ -209,16 +209,21 @@ public class Pot : MonoBehaviour
 
     public void TryPlay(int pitch)
     {
+        if (_active)
+        {
+            // visualize when it's trying to play audio
+            GetComponent<Animation>().Play();
+        }
+
         if (!HasVeg)
         {
             return;
         }
 
-        // TODO remove - just doing this to visualize when it's trying to play audio
-        GetComponent<Animation>().Play();
-
         _source.clip = _veg.Clip(pitch);
         Debug.Log("playing clip: " + _source.clip);
+        var volume = Mathf.Clamp01(_growthSecondsElapsed / _veg.SecondsToFullGrowth);
+        _source.volume = _veg.MaxClipVolume * volume;
         _source.Play();
     }
 
