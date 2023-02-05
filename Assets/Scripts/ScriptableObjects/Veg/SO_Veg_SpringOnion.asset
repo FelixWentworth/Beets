@@ -30,8 +30,8 @@ MonoBehaviour:
   - Level: 6
     AudioClip: {fileID: 8300000, guid: 0a5986e7eb46248d78d2308d38672f7e, type: 3}
   MaxClipVolume: 1
-  Prefab: {fileID: 5168357201477302832, guid: a7647e312054b440aa169baaa51cd154, type: 3}
-  Icon: {fileID: 21300000, guid: 281d86bd7c7d249f093c55a7a55a57a5, type: 3}
+  Prefab: {fileID: 5168357201477302832, guid: a875413857dca497fafadf32a85c79b0, type: 3}
+  Icon: {fileID: 21300000, guid: 2da1a3473da8c4917887e8f268c6a3c6, type: 3}
   SecondsToFullGrowth: 40
   SeedPrice: 5
   LifeStages:

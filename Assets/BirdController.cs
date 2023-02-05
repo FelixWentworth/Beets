@@ -26,10 +26,12 @@ public class BirdController : MonoBehaviour
     private bool _currentBirdOnFence = false;
     private int roundsElapsed = 0;
     private int roundsUntilNextBird = 0;
+    private GameManager _manager;
 
 
     private void Awake()
     {
+        _manager = FindObjectOfType<GameManager>();
         GameManager.OnColumnAudioHit += OnColumnAudioHit;
     }
 
@@ -48,7 +50,6 @@ public class BirdController : MonoBehaviour
         if (currentBirdGO == null && columnIndex == 0)
         {
             roundsElapsed++;
-            Debug.Log($"{roundsElapsed}/{roundsUntilNextBird} elapsed");
             if (roundsElapsed >= roundsUntilNextBird)
             {
                 
@@ -131,7 +132,8 @@ public class BirdController : MonoBehaviour
 
     Transform GetNewTarget()
     {
-        _currentBirdFenceIndex = Random.Range(0, _fenceTargets.Count); 
+        
+        _currentBirdFenceIndex = Random.Range(0, _manager.TopRightPos.x); 
         return _fenceTargets[_currentBirdFenceIndex];
     }
 }

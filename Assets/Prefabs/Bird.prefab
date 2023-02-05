@@ -9897,7 +9897,7 @@ Transform:
   m_GameObject: {fileID: 895258983011482844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.76, y: 6.74, z: 6.89}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4001779711151526470}
@@ -10473,16 +10473,16 @@ MonoBehaviour:
   SelectedState: 1
   SelectedStance: 0
   ShowStateInInspector: 1
-  Editor_Tabs1: 0
+  Editor_Tabs1: 4
   Mode_Tabs1: 0
-  Editor_Tabs2: 4
+  Editor_Tabs2: 3
   Ability_Tabs: 0
   Editor_EventTabs: 0
-  showPivots: 1
-  debugStates: 1
+  showPivots: 0
+  debugStates: 0
   debugStances: 0
   debugModes: 0
-  debugGizmos: 1
+  debugGizmos: 0
   states:
   - {fileID: 11400000, guid: 8618db1c3b454f948aa73f4a06ffa884, type: 2}
   - {fileID: 11400000, guid: 77a873c203d623643a9dd97ee9747c04, type: 2}
@@ -18555,12 +18555,7 @@ MonoBehaviour:
   - Name: Skin
     mesh: {fileID: 7631510281116945412}
     materials:
-    - {fileID: 2100000, guid: 00621238b3b39d748ad8309ec22d3912, type: 2}
-    - {fileID: 2100000, guid: 5ce87bbd2d9c6c64e9aea56f5c5a95db, type: 2}
-    - {fileID: 2100000, guid: 307144bf70f29944baca4301611f0a75, type: 2}
-    - {fileID: 2100000, guid: d1ba7160178804d44b626b1b6be23657, type: 2}
     - {fileID: 2100000, guid: 7bd53ad544cb8df46a430a21b2e758e8, type: 2}
-    - {fileID: 2100000, guid: e46b099a0bb4d714cab528fb9df0be8f, type: 2}
     - {fileID: 2100000, guid: a1083feeed00bba41b6a3f9f58c67a2f, type: 2}
     Linked: 0
     Master: 0
@@ -19561,7 +19556,7 @@ MonoBehaviour:
   target: {fileID: 0}
   nextTarget: {fileID: 0}
   debug: 0
-  debugGizmos: 1
+  debugGizmos: 0
   debugStatus: 0
   OnTargetPositionArrived:
     m_PersistentCalls:
