@@ -192,8 +192,8 @@ MonoBehaviour:
   - {fileID: 951125006700134799}
   - {fileID: 951125007283004376}
   - {fileID: 951125007964233920}
-  _birdDurationMin: 15
-  _birdDurationMax: 25
+  _birdDurationMin: 10
+  _birdDurationMax: 15
   _birdSpawnRoundsMin: 2
   _birdSpawnRoundsMax: 4
   _birdSongVar1:
@@ -219,7 +219,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.678
   m_Pitch: 1
   Loop: 0
   Mute: 0
