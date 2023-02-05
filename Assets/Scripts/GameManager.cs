@@ -16,16 +16,16 @@ public class GameManager : MonoBehaviour
     public static Action<int> OnMoneyChanged;
     public static Action<SO_Veg> OnVegBought;
 
-private int _money;
-public int Money
-{
-    get => _money;
-    set
+    private int _money;
+    public int Money
     {
-        _money = value;
-        OnMoneyChanged?.Invoke(_money);
+        get => _money;
+        set
+        {
+            _money = value;
+            OnMoneyChanged?.Invoke(_money);
+        }
     }
-}
 
     [SerializeField] private SO_WorldSettings _worldSettings;
     [SerializeField] private Transform _worldParent;
