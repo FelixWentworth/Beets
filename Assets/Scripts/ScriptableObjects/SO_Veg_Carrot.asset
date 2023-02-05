@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Carrot
   AudioType: Guitar
-  Clip: {fileID: 0}
+  Clips: []
   Prefab: {fileID: 5168357201477302832, guid: a7647e312054b440aa169baaa51cd154, type: 3}
   Icon: {fileID: 21300000, guid: 9932bae7541af456dababc5df8dece97, type: 3}
   SecondsToFullGrowth: 5
-  UnlockCost: 0
+  SeedPrice: 5
   LifeStages:
   - LevelNum: 0
     HarvestValue: 0

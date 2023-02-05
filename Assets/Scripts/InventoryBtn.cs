@@ -19,10 +19,20 @@ public class InventoryBtn : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void Init(SO_Veg veg, int startingQuantity)
     {
         VegPlacer.OnVegPlaced += OnVegPlaced;
+        GameManager.OnVegBought += OnSeedBought;
         _quantity = startingQuantity;
         _veg = veg;
         _icon.sprite = veg.Icon;
         UpdateState();
+    }
+
+    private void OnSeedBought(SO_Veg soVeg)
+    {
+        if (soVeg.Name == _veg.Name)
+        {
+            _quantity++;
+            UpdateState();
+        }
     }
 
     private void OnDestroy()
@@ -43,6 +53,7 @@ public class InventoryBtn : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         _cg.alpha = hasAny ? 1f : 0.2f;
         _cg.interactable = hasAny;
+        _quantityText.text = _quantity.ToString();
     }
 
     public void OnPointerDown(PointerEventData eventData)

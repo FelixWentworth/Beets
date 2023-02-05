@@ -22,11 +22,18 @@ public class UiManager : MonoBehaviour
     
     private void Awake()
     {
+        
         _gameManager = FindObjectOfType<GameManager>();
         InventoryBtn.OnSelected += OnSelected;
         InventoryBtn.OnDragEnd += OnDragEnd;
         GameManager.OnMoneyChanged += OnMoneyChanged;
         VegPlacer.OnVegPlaced += OnPotInteracted;
+        GameManager.OnVegBought += OnSeedBought;
+    }
+
+    private void OnSeedBought(SO_Veg soVeg)
+    {
+        _inventory[soVeg.Name]++;
     }
 
     private void OnPotInteracted(string vegName)
@@ -52,7 +59,7 @@ public class UiManager : MonoBehaviour
         InventoryBtn.OnDragEnd -= OnDragEnd;
         GameManager.OnMoneyChanged -= OnMoneyChanged;
         VegPlacer.OnVegPlaced -= OnPotInteracted;
-
+        ShopItemBtn.OnShopItemPressed -= OnSeedBought;
     }
 
     private void OnDragEnd()
@@ -90,7 +97,7 @@ public class UiManager : MonoBehaviour
             var vegConfig = _gameManager.Veg.FirstOrDefault(v => v.Name == inventoryKey);
             var newBtn = Instantiate(_inventoryBtnPrefab, _inventoryParent);
             var newShopBtn = Instantiate(_shopBtnPrefab, _shopParent);
-            newShopBtn.Set(vegConfig);
+            newShopBtn.Set(vegConfig, _gameManager);
             newBtn.Init(vegConfig, _inventory[inventoryKey]);
         }
     }
