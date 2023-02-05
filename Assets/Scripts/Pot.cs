@@ -221,7 +221,7 @@ public class Pot : MonoBehaviour
         }
 
         _source.clip = _veg.Clip(pitch);
-        Debug.Log("playing clip: " + _source.clip);
+        // Debug.Log("playing clip: " + _source.clip);
         var volume = Mathf.Clamp01(_growthSecondsElapsed / _veg.SecondsToFullGrowth);
         _source.volume = _veg.MaxClipVolume * volume;
         _source.Play();
