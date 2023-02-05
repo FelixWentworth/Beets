@@ -19,6 +19,11 @@ public class Pot : MonoBehaviour
     [SerializeField] private AudioSource _source;
     [SerializeField] private float _startingVegScaleMultiplier;
 
+    [Header("Unlock")]
+    [SerializeField] private GameObject _unlockState;
+    [SerializeField] private GameObject _sign;
+    [SerializeField] private TMPro.TextMeshPro _cost;
+
     private GameObject _currentVeg;
     private SO_Veg _veg;
     private float _wateringLevel = 0f;
@@ -27,7 +32,14 @@ public class Pot : MonoBehaviour
     private Vector3 _finalScale;
 
     private float _growthSecondsElapsed = 0f;
-    
+
+    private bool _showSign = false;
+
+    private void Start()
+    {
+        _sign.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         if (HasVeg)
@@ -70,8 +82,9 @@ public class Pot : MonoBehaviour
         _gridPos = gridPos;
         _activeState.SetActive(active);
         _inactiveState.SetActive(!active);
+        _unlockState.SetActive(false);
 
-
+        
         if (vegToSpawn != null)
         {
             _veg = vegToSpawn;
@@ -82,6 +95,23 @@ public class Pot : MonoBehaviour
             modelTransform.localScale = Vector3.one * _startingVegScaleMultiplier;
             _wateringLevel = 0f;
         }
+    }
+
+    public void SetUnlockVisuals(Material mat, bool showSign = false, string signText = "")
+    {
+        _unlockState.GetComponent<MeshRenderer>().material = mat;
+        _showSign = showSign;
+        _cost.text = signText;
+    }
+
+    private void OnShopToggle(bool active)
+    {
+        if (_activeState.activeSelf)
+        {
+            return;
+        }
+        _unlockState.SetActive(active);
+        _sign.SetActive(_showSign);
     }
 
     public int GetHarvestValue()
