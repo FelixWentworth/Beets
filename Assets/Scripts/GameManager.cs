@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Material _expandRowMaterial;
     [SerializeField] private Material _expandColumnMaterial;
 
-
+    public Vector2Int TopRightPos => _topRightUnlockedPos;
     private Pot[,] _grid;
     private List<Vector2Int> _activePotPositions = new List<Vector2Int>();
     private Vector2Int _topRightUnlockedPos = new Vector2Int(0, 0);
