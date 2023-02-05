@@ -12,9 +12,11 @@ public class GameManager : MonoBehaviour
         Water,
         Harvest
     }
+    public static Action OnBeat;
     public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
     public static Action<int> OnMoneyChanged;
     public static Action<SO_Veg> OnVegBought;
+    public static Action NextBPM;
 
     private int _money;
     public int Money
@@ -41,14 +43,17 @@ public class GameManager : MonoBehaviour
 
     public SO_Veg[] Veg;
 
-    public int BPM;
+    public static int CurrentBPM;
+    public int[] BPMs;
     private int _nextRowCost => _worldSettings.RowCost(_topRightUnlockedPos.y + 1 - _worldSettings.StartHeight);
     private int _nextColumnCost => _worldSettings.RowCost(_topRightUnlockedPos.x + 1 - _worldSettings.StartWidth);
-    
+
+    private int _currentBPMIndex = 0;
 
     private void Awake()
     {
         ShopItemBtn.OnShopItemPressed += OnSeedBought;
+        NextBPM = GoToNextBPM;
     }
 
     private void OnSeedBought(SO_Veg veg)
@@ -64,7 +69,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         InteractWithPot = HandleGameAction;
+        CurrentBPM = BPMs[_currentBPMIndex];
         CreateNewWorld();
+    }
+
+    public void GoToNextBPM()
+    {
+        _currentBPMIndex++;
+        _currentBPMIndex %= BPMs.Length;
+        CurrentBPM = BPMs[_currentBPMIndex];
+        _audioLine.SetBPM(BPMs[_currentBPMIndex]);
     }
 
     private void CreateNewWorld()
@@ -316,19 +330,20 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        _audioLine.Set(-0.5f, _topRightUnlockedPos.x + 0.5f, BPM);  
+        _audioLine.Set(-0.5f, _topRightUnlockedPos.x + 0.5f, BPMs[_currentBPMIndex]);
         SetExpandCosts();
     }
 
     private void SetAudioLine()
     {
-        _audioLine.Set(-0.5f, _worldSettings.StartWidth - 0.5f, BPM);
+        _audioLine.Set(-0.5f, _worldSettings.StartWidth - 0.5f, BPMs[_currentBPMIndex]);
         _audioLine.OnNewPos += OnAudioHit;
         _audioLine.Play();
     }
 
     private void OnAudioHit(int x)
     {
+        OnBeat?.Invoke();
         // Debug.Log("On Audio Hit: " + x);
         foreach (var pot in _activePotPositions)
         {            
