@@ -29,6 +29,11 @@ public class AudioLine : MonoBehaviour
         _endXPosition = endX;
     }
 
+    public void SetBPM(float bpm)
+    {
+        _bpm = bpm;
+    }
+
     public void Play()
     {
         _isPlaying = true;

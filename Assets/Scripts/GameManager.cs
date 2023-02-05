@@ -12,27 +12,49 @@ public class GameManager : MonoBehaviour
         Water,
         Harvest
     }
+    public static Action OnBeat;
     public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
     public static Action<int> OnMoneyChanged;
     public static Action<int> OnColumnAudioHit;
     public static Action<SO_Veg> OnVegBought;
+    public static Action NextBPM;
 
-    [HideInInspector] public int Money;
+    private int _money;
+    public int Money
+    {
+        get => _money;
+        set
+        {
+            _money = value;
+            OnMoneyChanged?.Invoke(_money);
+        }
+    }
 
     [SerializeField] private SO_WorldSettings _worldSettings;
     [SerializeField] private Transform _worldParent;
     [SerializeField] private AudioLine _audioLine;
 
+    [SerializeField] private Material _expandRowMaterial;
+    [SerializeField] private Material _expandColumnMaterial;
+
+
     private Pot[,] _grid;
     private List<Vector2Int> _activePotPositions = new List<Vector2Int>();
+    private Vector2Int _topRightUnlockedPos = new Vector2Int(0, 0);
 
     public SO_Veg[] Veg;
 
-    public int BPM;
+    public static int CurrentBPM;
+    public int[] BPMs;
+    private int _nextRowCost => _worldSettings.RowCost(_topRightUnlockedPos.y + 1 - _worldSettings.StartHeight);
+    private int _nextColumnCost => _worldSettings.RowCost(_topRightUnlockedPos.x + 1 - _worldSettings.StartWidth);
+
+    private int _currentBPMIndex = 0;
 
     private void Awake()
     {
         ShopItemBtn.OnShopItemPressed += OnSeedBought;
+        NextBPM = GoToNextBPM;
     }
 
     private void OnSeedBought(SO_Veg veg)
@@ -40,7 +62,6 @@ public class GameManager : MonoBehaviour
         if (Money >= veg.SeedPrice)
         {
             Money -= veg.SeedPrice;
-            OnMoneyChanged?.Invoke(Money);
             OnVegBought?.Invoke(veg);
         }
     }
@@ -49,7 +70,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         InteractWithPot = HandleGameAction;
+        CurrentBPM = BPMs[_currentBPMIndex];
         CreateNewWorld();
+    }
+
+    public void GoToNextBPM()
+    {
+        _currentBPMIndex++;
+        _currentBPMIndex %= BPMs.Length;
+        CurrentBPM = BPMs[_currentBPMIndex];
+        _audioLine.SetBPM(BPMs[_currentBPMIndex]);
     }
 
     private void CreateNewWorld()
@@ -57,8 +87,12 @@ public class GameManager : MonoBehaviour
         SetActivePotPositions();
         GeneratePots();
         SetAudioLine();
+        SetExpandCosts();
 
-        GameManager.InteractWithPot(GameAction.Plant, new Vector2Int(0, 4), "Beet");
+        InteractWithPot(GameAction.Plant, new Vector2Int(0, 0), "Potato");
+        //InteractWithPot(GameAction.Plant, new Vector2Int(1, 2), "Potato");
+        InteractWithPot(GameAction.Plant, new Vector2Int(2, 0), "Potato");
+        InteractWithPot(GameAction.Plant, new Vector2Int(3, 2), "Potato");
     }
 
     private void HandleGameAction(GameAction action, Vector2Int target, string veg)
@@ -106,7 +140,6 @@ public class GameManager : MonoBehaviour
         var value = pot.GetHarvestValue();
         var accuracy = GetInputAccuracy();
         Money += Mathf.RoundToInt(value * accuracy);
-        OnMoneyChanged?.Invoke(Money);
         pot.Uproot();
     }
 
@@ -134,6 +167,10 @@ public class GameManager : MonoBehaviour
                 if (!_activePotPositions.Contains(activePos))
                 {
                     _activePotPositions.Add(activePos);
+                    if (activePos.x > _topRightUnlockedPos.x || activePos.y > _topRightUnlockedPos.y)
+                    {
+                        _topRightUnlockedPos = activePos;
+                    }
                 }
             }
         }
@@ -159,15 +196,155 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void SetExpandCosts()
+    {
+        
+        var rowCoord = _topRightUnlockedPos.y;
+        var rowSignSet = false;
+        var rows = GetExpansionRow();
+        foreach(var coord in rows)
+        {
+            var pot = _grid[coord.x, coord.y];
+            if (!rowSignSet)
+            {
+                pot.SetUnlockState(_expandRowMaterial, TryUnlockRow, true, $"${_nextRowCost}");
+                rowSignSet = true;
+            }
+            else
+            {
+                pot.SetUnlockState(_expandRowMaterial, TryUnlockRow);
+            }
+            pot.Refresh();
+        }   
+
+        var columns = GetExpansionColumn();
+        var colSignSet = false;
+        foreach (var coord in columns)
+        {
+            var pot = _grid[coord.x, coord.y];
+            if (!colSignSet)
+            {
+                pot.SetUnlockState(_expandColumnMaterial, TryUnlockColumn, true, $"${_nextColumnCost}");
+                colSignSet = true;
+            }
+            else
+            {
+                pot.SetUnlockState(_expandColumnMaterial, TryUnlockColumn);
+            }
+            pot.Refresh();
+        }
+    }
+
+    private List<Vector2Int> GetExpansionRow()
+    {
+        var list = new List<Vector2Int>();
+        var rowCoord = _topRightUnlockedPos.y;
+        if (rowCoord < _worldSettings.MaxHeight)
+        {
+            for (var i = 0; i < _worldSettings.RowsUnlockedPerPurchase; i++)
+            {
+                rowCoord++;
+                if (rowCoord >= _worldSettings.MaxHeight)
+                {
+                    break;
+                }
+                // color the row
+                for (var x = 0; x <= _topRightUnlockedPos.x; x++)
+                {
+                    list.Add(new Vector2Int(x, rowCoord));
+                }
+            }
+        }
+        return list;
+    }
+
+    private List<Vector2Int> GetExpansionColumn()
+    {
+        var list = new List<Vector2Int>();
+        var colCoord = _topRightUnlockedPos.x;
+        if (colCoord < _worldSettings.MaxWidth)
+        {
+            for (var i = 0; i < _worldSettings.ColumnsUnlockedPerPurchase; i++)
+            {
+                colCoord++;
+                if (colCoord >= _worldSettings.MaxWidth)
+                {
+                    break;
+                }
+                // color the row
+                for (var y = 0; y <= _topRightUnlockedPos.y; y++)
+                {
+                    list.Add(new Vector2Int(colCoord, y));
+                }
+            }
+        }
+        return list;
+    }
+
+    private void TryUnlockRow()
+    {
+        if(Money < _nextRowCost)
+        {
+            Debug.Log("not enough money");
+            return;
+        }
+        Money -= _nextRowCost;
+
+        var pots = GetExpansionRow();
+        foreach (var coord in pots)
+        {
+            var pot = _grid[coord.x, coord.y];
+            pot.Set(coord, active: true);
+            if (!_activePotPositions.Contains(coord))
+            {
+                _activePotPositions.Add(coord);
+                if (coord.x > _topRightUnlockedPos.x || coord.y > _topRightUnlockedPos.y)
+                {
+                    _topRightUnlockedPos = coord;
+                }
+            }
+        }
+        SetExpandCosts();
+    }
+
+    private void TryUnlockColumn()
+    {
+        if (Money < _nextColumnCost)
+        {
+            Debug.Log("not enough money");
+            return;
+        }
+
+        Money -= _nextColumnCost;
+
+        var pots = GetExpansionColumn();
+        foreach (var coord in pots)
+        {
+            var pot = _grid[coord.x, coord.y];
+            pot.Set(coord, active: true);
+            if (!_activePotPositions.Contains(coord))
+            {
+                _activePotPositions.Add(coord);
+                if (coord.x > _topRightUnlockedPos.x || coord.y > _topRightUnlockedPos.y)
+                {
+                    _topRightUnlockedPos = coord;
+                }
+            }
+        }
+        _audioLine.Set(-0.5f, _topRightUnlockedPos.x + 0.5f, BPMs[_currentBPMIndex]);
+        SetExpandCosts();
+    }
+
     private void SetAudioLine()
     {
-        _audioLine.Set(-0.5f, _worldSettings.StartWidth - 0.5f, BPM);
+        _audioLine.Set(-0.5f, _worldSettings.StartWidth - 0.5f, BPMs[_currentBPMIndex]);
         _audioLine.OnNewPos += OnAudioHit;
         _audioLine.Play();
     }
 
     private void OnAudioHit(int x)
     {
+        OnBeat?.Invoke();
         // Debug.Log("On Audio Hit: " + x);
         foreach (var pot in _activePotPositions)
         {            
@@ -189,4 +366,6 @@ public class GameManager : MonoBehaviour
     {
         return 1f;
     }
+
+    
 }
