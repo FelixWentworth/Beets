@@ -32,7 +32,7 @@ MonoBehaviour:
   Prefab: {fileID: 5168357201477302832, guid: a7647e312054b440aa169baaa51cd154, type: 3}
   Icon: {fileID: 21300000, guid: 10e7d2517fc09472eb3d4dac9b9c851b, type: 3}
   SecondsToFullGrowth: 5
-  UnlockCost: 0
+  SeedPrice: 5
   LifeStages:
   - LevelNum: 0
     HarvestValue: 0

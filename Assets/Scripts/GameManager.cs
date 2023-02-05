@@ -14,16 +14,18 @@ public class GameManager : MonoBehaviour
     }
     public static Action<GameAction, Vector2Int, string> InteractWithPot { get; private set; }
     public static Action<int> OnMoneyChanged;
-    private int _money;
-    public int Money
+    public static Action<SO_Veg> OnVegBought;
+
+private int _money;
+public int Money
+{
+    get => _money;
+    set
     {
-        get => _money;
-        set
-        {
-            _money = value;
-            OnMoneyChanged?.Invoke(_money);
-        }
+        _money = value;
+        OnMoneyChanged?.Invoke(_money);
     }
+}
 
     [SerializeField] private SO_WorldSettings _worldSettings;
     [SerializeField] private Transform _worldParent;
@@ -40,9 +42,23 @@ public class GameManager : MonoBehaviour
     public SO_Veg[] Veg;
 
     public int BPM;
-
     private int _nextRowCost => _worldSettings.RowCost(_topRightUnlockedPos.y + 1 - _worldSettings.StartHeight);
     private int _nextColumnCost => _worldSettings.RowCost(_topRightUnlockedPos.x + 1 - _worldSettings.StartWidth);
+    
+
+    private void Awake()
+    {
+        ShopItemBtn.OnShopItemPressed += OnSeedBought;
+    }
+
+    private void OnSeedBought(SO_Veg veg)
+    {
+        if (Money >= veg.SeedPrice)
+        {
+            Money -= veg.SeedPrice;
+            OnVegBought?.Invoke(veg);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
