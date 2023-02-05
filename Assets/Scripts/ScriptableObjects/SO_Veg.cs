@@ -14,6 +14,8 @@ public class SO_Veg : ScriptableObject
     public string AudioType; 
     public VegSound[] Clips;
     public AudioClip Clip(int pitchLevel) => Clips.FirstOrDefault(c => c.Level == pitchLevel).AudioClip;
+    [Range(0f, 1f)]
+    public float MaxClipVolume = 1;
 
     [System.Serializable]
     public class VegSound
