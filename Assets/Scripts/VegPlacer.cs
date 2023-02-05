@@ -87,15 +87,17 @@ public class VegPlacer : MonoBehaviour
     private void OnDragEnd()
     {
         
-        previousPot.SetHighlight(false);
         Destroy(_currentSpawnedVeg);
         _currentSpawnedVeg = null;
         IsPlacingVeg = false;
-        
-        if (previousPot.Active)
+        if (previousPot != null)
         {
-            OnVegPlaced?.Invoke(_currentVeg.Name);
-            GameManager.InteractWithPot(GameManager.GameAction.Plant, previousPot.GridPos, _currentVeg.Name);
+            previousPot.SetHighlight(false);
+            if (previousPot.Active)
+            {
+                OnVegPlaced?.Invoke(_currentVeg.Name);
+                GameManager.InteractWithPot(GameManager.GameAction.Plant, previousPot.GridPos, _currentVeg.Name);
+            }
         }
     }
 
