@@ -48,7 +48,6 @@ public class BirdController : MonoBehaviour
         if (currentBirdGO == null && columnIndex == 0)
         {
             roundsElapsed++;
-            Debug.Log($"{roundsElapsed}/{roundsUntilNextBird} elapsed");
             if (roundsElapsed >= roundsUntilNextBird)
             {
                 
