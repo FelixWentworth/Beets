@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Pot : MonoBehaviour
 {
     public bool HasVeg => _veg != null;
     public Vector2Int GridPos => _gridPos;
     public bool Active => _active;
+
+
     [SerializeField] private Transform _vegSpawnPoint;
     [SerializeField] private GameObject _activeState;
     [SerializeField] private GameObject _inactiveState;
@@ -21,8 +24,12 @@ public class Pot : MonoBehaviour
 
     [Header("Unlock")]
     [SerializeField] private GameObject _unlockState;
+    [SerializeField] private MeshRenderer _unlockMesh;
     [SerializeField] private GameObject _sign;
     [SerializeField] private TMPro.TextMeshPro _cost;
+    [SerializeField] private LayerMask _potsLayer;
+
+    private bool _showUnlockState = false;
 
     private GameObject _currentVeg;
     private SO_Veg _veg;
@@ -31,13 +38,17 @@ public class Pot : MonoBehaviour
     private bool _active;
     private Vector3 _finalScale;
 
+    private Action _onTryExpand;
+
     private float _growthSecondsElapsed = 0f;
 
     private bool _showSign = false;
+    private bool _shopActive;
 
     private void Start()
     {
         _sign.gameObject.SetActive(false);
+        UiManager.OnShopToggled += OnShopToggle;
     }
 
     private void Update()
@@ -56,6 +67,23 @@ public class Pot : MonoBehaviour
             }
             LerpToGrowthStage(growthStage);
             // _currentVeg.transform.localScale = _finalScale * growthPercentage;
+        }
+        else if (_unlockState.activeSelf) {
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit;
+                var mousePos = Input.mousePosition;
+                var ray = Camera.main.ScreenPointToRay(mousePos);
+                Physics.Raycast(ray, out hit, 999f, _potsLayer);
+                if (hit.collider != null)
+                {
+                    var pot = hit.collider.GetComponent<Pot>();
+                    if (pot != null && pot == this)
+                    {
+                        _onTryExpand?.Invoke();
+                    }
+                }
+            }
         }
     }
 
@@ -83,6 +111,11 @@ public class Pot : MonoBehaviour
         _activeState.SetActive(active);
         _inactiveState.SetActive(!active);
         _unlockState.SetActive(false);
+        if (active)
+        {
+            _showSign = false;
+            _sign.SetActive(false);
+        }
 
         
         if (vegToSpawn != null)
@@ -97,21 +130,31 @@ public class Pot : MonoBehaviour
         }
     }
 
-    public void SetUnlockVisuals(Material mat, bool showSign = false, string signText = "")
+    public void SetUnlockState(Material mat, Action onClick, bool showSign = false, string signText = "")
     {
-        _unlockState.GetComponent<MeshRenderer>().material = mat;
+        _showUnlockState = mat != null;
+        _unlockMesh.material = mat;
         _showSign = showSign;
         _cost.text = signText;
+
+        _onTryExpand = onClick;
+    }
+
+    public void Refresh()
+    {
+        OnShopToggle(_shopActive);
     }
 
     private void OnShopToggle(bool active)
     {
-        if (_activeState.activeSelf)
+        _shopActive = active;
+        if (_activeState.activeSelf || !_showUnlockState)
         {
+            _sign.SetActive(false); 
             return;
         }
         _unlockState.SetActive(active);
-        _sign.SetActive(_showSign);
+        _sign.SetActive(_showSign && active);
     }
 
     public int GetHarvestValue()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571336, b: 0.3069219, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1093,10 +1093,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24474cf230f94c0299408eb52edffb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: 0
   _worldSettings: {fileID: 11400000, guid: 399be2bdf1de5483a955b0220bb0fce3, type: 2}
   _worldParent: {fileID: 1221383478}
   _audioLine: {fileID: 1204074535}
+  _expandRowMaterial: {fileID: 2100000, guid: 5b4bdf6c57dac44258bec4b0f34076e4, type: 2}
+  _expandColumnMaterial: {fileID: 2100000, guid: 3dafb0c7f8c394186a82428053f3b175,
+    type: 2}
   Veg:
   - {fileID: 11400000, guid: a3ce72c283abc473ea88f58471fb5d92, type: 2}
   - {fileID: 11400000, guid: 622762cf01c13432dbeaf3507541f56f, type: 2}
